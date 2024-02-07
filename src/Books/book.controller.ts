@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { BookServices } from "./book.service";
 import { Book } from "./data/book.dto";
+import { BookPipe } from "./pipe/book.pipe";
 
 @Controller("/book")
 export class BookController{
@@ -19,13 +20,14 @@ export class BookController{
         return this.bookservice.getSingleBook(bookId);
     }
 
+    // In the body parameter we must be defined the bookpipe object to call the pipe validator service.
     @Post("/add/new/book")
-    addNewBook(@Body() newbook : Book) : Book{
+    addNewBook(@Body(new BookPipe()) newbook) : Book{
         return this.bookservice.addBook(newbook);
     }
 
     @Put("/upadate/book")
-    updateBook(@Body() updateBook: Book) : Book{
+    updateBook(@Body(new BookPipe()) updateBook) : Book{
         return this.bookservice.updateBook(updateBook);
     }
 
