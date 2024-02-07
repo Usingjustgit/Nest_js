@@ -1,6 +1,7 @@
 import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
 import { BookServices } from "./book.service";
 import { Book } from "./data/book.dto";
+import { BookException } from "src/custom_error/book.exception";
 
 @Controller("/book")
 export class BookController{
@@ -10,10 +11,7 @@ export class BookController{
 
     @Get("/all/books")
     fetchAllBook() : Book[]{
-        throw new BadRequestException({
-            status : 400,
-            error: "This is instant custom error request."
-        })
+        throw new BookException();
         return this.bookservice.getAllBooks();
     }
 

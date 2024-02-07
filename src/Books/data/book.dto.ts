@@ -1,17 +1,17 @@
-import { IsInt, IsNumberString, IsString } from "class-validator";
+import { IsInt, IsString } from "class-validator";
 
 export class Book{
     
-    id : number;
+    id : Number;
 
     @IsString()
     title : string;
 
     @IsInt()
-    price : number;
+    price : Number;
 
     @IsInt()
-    released : number;
+    released : Number;
 
     @IsString()
     developedBy : string;
