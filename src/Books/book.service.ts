@@ -5,8 +5,8 @@ export class BookServices{
     public generatId = 1000;
 
     addBook(newBook : Book) : Book{
-        // newBook.id = this.generatId + 1;
-        // this.generatId++;
+        newBook.id = this.generatId + 1;
+        this.generatId++;
         this.book.push(newBook);
         return newBook;
     }

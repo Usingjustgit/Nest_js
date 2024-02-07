@@ -1,7 +1,6 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
 import { BookServices } from "./book.service";
 import { Book } from "./data/book.dto";
-import { BookPipe } from "./pipe/book.pipe";
 
 @Controller("/book")
 export class BookController{
@@ -20,14 +19,14 @@ export class BookController{
         return this.bookservice.getSingleBook(bookId);
     }
 
-    // In the body parameter we must be defined the bookpipe object to call the pipe validator service.
+    // Now we will use the build validator class to verify the class varibles type...
     @Post("/add/new/book")
-    addNewBook(@Body(new BookPipe()) newbook) : Book{
+    addNewBook(@Body(new ValidationPipe()) newbook) : Book{
         return this.bookservice.addBook(newbook);
     }
 
     @Put("/upadate/book")
-    updateBook(@Body(new BookPipe()) updateBook) : Book{
+    updateBook(@Body(new ValidationPipe()) updateBook) : Book{
         return this.bookservice.updateBook(updateBook);
     }
 

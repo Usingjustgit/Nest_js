@@ -2,7 +2,6 @@ import { IsInt, IsNumberString, IsString } from "class-validator";
 
 export class Book{
     
-    @IsNumberString()
     id : number;
 
     @IsString()
