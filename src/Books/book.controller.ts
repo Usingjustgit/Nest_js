@@ -1,7 +1,7 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, UseFilters, ValidationPipe } from "@nestjs/common";
 import { BookServices } from "./book.service";
 import { Book } from "./data/book.dto";
-import { BookException } from "src/custom_error/book.exception";
+import { BookExceptionFilter } from "src/custom_error/book.exception.filter";
 
 @Controller("/book")
 export class BookController{
@@ -10,8 +10,9 @@ export class BookController{
     }
 
     @Get("/all/books")
+    @UseFilters(new BookExceptionFilter())
     fetchAllBook() : Book[]{
-        throw new BookException();
+        throw new BadRequestException();
         return this.bookservice.getAllBooks();
     }
 
