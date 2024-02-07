@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, UseFilters, UseGuards, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req, Res, UseFilters, UseGuards, UseInterceptors, ValidationPipe } from "@nestjs/common";
 import { BookServices } from "./book.service";
 import { Book } from "./data/book.dto";
-import { BookGaurd } from "src/security_gaurd/book.gaurd";
+import { BookInterseptor } from "src/interceptors/book.interceptor";
+import { Request, Response } from "express";
 
 @Controller("/book")
 export class BookController{
@@ -10,9 +11,10 @@ export class BookController{
     }
 
     @Get("/all/books")
-    @UseGuards(new BookGaurd())
-    fetchAllBook() : Book[]{
-        return this.bookservice.getAllBooks();
+    @UseInterceptors(BookInterseptor)
+    fetchAllBook() : any{
+        return "This is a new response changed.";
+        // return this.bookservice.getAllBooks();
     }
 
     // Here user the ParseIntPipe => It is generaly used to convert the type of Variavble.
