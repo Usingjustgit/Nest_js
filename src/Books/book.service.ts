@@ -16,7 +16,7 @@ export class BookServices{
     }
 
     getSingleBook(bookId : Number) : Book{
-        const findedBook = this.book.findIndex(book => book.id == bookId);
+        const findedBook = this.book.findIndex(book => book.id === bookId);
         return this.book[findedBook];
     }
 
@@ -27,7 +27,7 @@ export class BookServices{
     }
 
     deleteSingleBook(bookId : Number) : String{
-        this.book = this.book.filter(book => book.id != bookId);
+        this.book = this.book.filter(book => book.id !== bookId);
         return `${bookId} id related all books deleted.`;
     }
 
