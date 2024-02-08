@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { User } from "./user.entity";
+import { jwtConstrant } from "src/jwtConstant";
 
 @Injectable()
 export class UserService{
@@ -8,19 +9,22 @@ export class UserService{
             id:1,
             name:"user1",
             email:'user1@gmail.com',
-            password:"user1@admin"
+            password:"user1@admin",
+            role:jwtConstrant.role.ADMIN,
         },
         {
             id:2,
             name:"user2",
             email:'user2@gmail.com',
-            password:"user2@admin"
+            password:"user2@admin",
+            role:jwtConstrant.role.USER,
         },
         {
             id:3,
             name:"user3",
             email:'user3@gmail.com',
-            password:"user3@admin"
+            password:"user3@admin",
+            role:jwtConstrant.role.USER,
         }
     ];
 

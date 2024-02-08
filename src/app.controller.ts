@@ -1,12 +1,29 @@
-import { Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { AuthenticationService } from "./Authentication_Service/auth.service";
+import { RoleStratergy } from "./Authentication_Service/role.stratergy";
+import { jwtConstrant } from "./jwtConstant";
 
 @Controller("/app")
 export class AppController{
 
+    constructor(private readonly jwtAuthService : AuthenticationService){}
+
     @Get("/")
     @UseGuards(AuthGuard('local'))
-    index() : string{
-        return "This is local controller...";
+    async index(@Request() req) : Promise<any>{
+        return await req.user;
+    }
+
+    @Post("/login")
+    @UseGuards(AuthGuard("local"),new RoleStratergy(jwtConstrant.role.ADMIN))
+    async login(@Request() req) : Promise<any>{
+        return await this.jwtAuthService.generateToken(req.user);
+    }
+
+    @Post("/verify")
+    @UseGuards(AuthGuard("local"), new RoleStratergy(jwtConstrant.role.USER))
+    async verify(@Request() req) : Promise<any>{
+        return await this.jwtAuthService.generateToken(req.user);
     }
 }

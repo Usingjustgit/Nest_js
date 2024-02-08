@@ -11,8 +11,6 @@ export class LocalAuthentication extends PassportStrategy(Strategy){
     }
 
     async validate(userId:number, userPassword:string):Promise<any>{
-        console.log("somthig happend...");
-        console.log(userId,userPassword);
         const currentUser = await this.userService.getUserById(userId);
 
         if(currentUser && currentUser.password === userPassword){
