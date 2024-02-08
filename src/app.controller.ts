@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthenticationService } from "./Authentication_Service/auth.service";
@@ -27,3 +28,16 @@ export class AppController{
         return await this.jwtAuthService.generateToken(req.user);
     }
 }
+=======
+import { Controller, Get } from '@nestjs/common';
+
+@Controller()
+export class AppController {
+  constructor() {}
+
+  @Get()
+  getHello(): string {
+    return "";
+  }
+}
+>>>>>>> cb92cbc (This is a connection and cured operation with mongoose.)
